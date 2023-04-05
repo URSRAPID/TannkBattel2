@@ -11,7 +11,7 @@ class UTankAimingComponent;
 
 class ATank;
 /**
- * 
+ *
  */
 UCLASS()
 class TANKBATTLE_API ATankPlayerController : public APlayerController
@@ -21,7 +21,7 @@ class TANKBATTLE_API ATankPlayerController : public APlayerController
 protected:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
-		ATank* GetControlledTank() const;
+		APawn* GetControlledTank() const;
 
 	UFUNCTION(BlueprintImplementableEvent, Category = Setup)
 		void FindAimingComponent(UTankAimingComponent* AimingComponentRef);
@@ -29,7 +29,7 @@ protected:
 private:
 	void AimTowardCrosshair();
 
-	bool GetSightRayHitLocation(FVector &OutHitLocation) const;
+	bool GetSightRayHitLocation(FVector& OutHitLocation) const;
 
 	bool GetLookVectorHitPosition(FVector LookDirection, FVector& HitLocation) const;
 
@@ -51,5 +51,5 @@ private:
 
 	UPROPERTY(EditDefaultsOnly)
 		float RayCastRange = 1000000.f;
-	
+
 };

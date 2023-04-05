@@ -3,19 +3,21 @@
 
 #include "TankAIController.h"
 #include "Tank.h"
+#include "TankAimingComponent.h"
 
-ATank* ATankAIController::GetControlledAITank()
+
+
+APawn* ATankAIController::GetControlledAITank()
 {
 	//ATank* var = ;
-	return Cast<ATank>(GetPawn());
+	return GetPawn();
 }
 
 void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
-	//GetControlledAITank()->AimAt(GetPlayerTank()->GetActorLocation());
-	//UE_LOG(LogTemp, Warning, TEXT("%s is controlled by AI"), *GetControlledAITank()->GetName());
-	
+
+
 }
 
 void ATankAIController::Tick(float Deltatime)
@@ -23,14 +25,15 @@ void ATankAIController::Tick(float Deltatime)
 	Super::Tick(Deltatime);
 
 
-	ATank* PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	ATank* OwnTank = Cast<ATank>(GetPawn());
+	APawn* PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+	APawn* OwnTank = GetPawn();
+	auto AimingComponent = GetControlledAITank()->FindComponentByClass<UTankAimingComponent>();
 
 	if (!ensure(PlayerTank)) { return; }
 
-	OwnTank->AimAt(PlayerTank->GetActorLocation());
-	//UE_LOG(LogTemp, Warning, TEXT("tank player pos % s"), *GetPlayerTank()->GetActorLocation().ToString());
-	OwnTank->Fire();
+	AimingComponent->AimAt(PlayerTank->GetActorLocation(), AimingComponent->GetLaunchSpeed());
+	
+	AimingComponent->Fire();
 
 	MoveToActor(PlayerTank, AcceptanceRadius);
 }

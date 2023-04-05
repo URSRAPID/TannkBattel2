@@ -4,6 +4,7 @@
 #include "TankAimingComponent.h"
 #include "CanonComponent.h"
 #include "TurretComponent.h"
+#include "Projectile.h"
 #include "Math/Vector.h"
 #include <Kismet/GameplayStatics.h>
 
@@ -24,7 +25,7 @@ void UTankAimingComponent::BeginPlay()
 	Super::BeginPlay();
 
 	// ...
-	
+
 }
 
 
@@ -55,17 +56,21 @@ void UTankAimingComponent::AimAt(FVector TargetLocation, float SpeedProjectile)
 	);
 	if (SolutionAiming)
 	{
-		//UE_LOG(LogTemp, Warning, TEXT("Aim possible "));
 		FVector AimingDirection = OutLaunchVelocity.GetSafeNormal();
-		//UE_LOG(LogTemp, Warning, TEXT("Aiming at : %s"), *AimingDirection.ToString());
+
 		MoveBarrelTowards(AimingDirection);
 	}
-	//else { /*UE_LOG(LogTemp, Warning, TEXT("Aim No Solution "));*/ }
+	
+}
+
+float UTankAimingComponent::GetLaunchSpeed()
+{
+	return LaunchSpeed;
 }
 
 void UTankAimingComponent::InitializeAiming(UCanonComponent* CanonReference, UTurretComponent* TurretReference)
 {
-	//if (!CanonReference || !TurretReference) { return; }
+	if (!CanonReference || !TurretReference) { return; }
 
 	Canon = CanonReference;
 	Turret = TurretReference;
@@ -79,9 +84,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - CanonRotation;
 
-	//UE_LOG(LogTemp, Warning, TEXT("AimDirection : %s"), *AimDirection.ToString());
-	//UE_LOG(LogTemp, Warning, TEXT("Aiming as Rotator : %s"), *AimAsRotator.ToString());
-	//UE_LOG(LogTemp, Warning, TEXT("Delta Rotator : %s"), *DeltaRotator.ToString());
+	
 
 	//Move the barrel the right amount this frame
 	//Given a max elevation speed, and the frame time
@@ -90,3 +93,29 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 
 }
+
+void UTankAimingComponent::Fire()
+{
+	bool IsReloaded = (FPlatformTime::Seconds() - LastTimeFire) > ReloadTime;
+	if (!ensure(ProjectileBlueprint)) { return; }
+
+	if (IsReloaded)
+	{
+	
+
+		FVector SpawnProjectileLocation = Canon->GetSocketLocation(FName("StartProjectile"));
+		FRotator SpawnProjectileRotation = Canon->GetSocketRotation(FName("StartProjectile"));
+
+		auto Projectile = GetWorld()->SpawnActor<AProjectile>(
+			ProjectileBlueprint,
+			SpawnProjectileLocation,
+			SpawnProjectileRotation
+			);
+
+		Projectile->LaunchProjectile(LaunchSpeed);
+		LastTimeFire = FPlatformTime::Seconds();
+	}
+}
+
+
+

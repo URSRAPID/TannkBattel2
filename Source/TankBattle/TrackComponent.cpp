@@ -5,7 +5,7 @@
 
 void UTrackComponent::SetThrottle(float Speed)
 {
-	//UE_LOG(LogTemp, Warning, TEXT("%s Throttle : %f"), *GetName(), Speed);
+	
 	FVector TrackForce = GetForwardVector() * Speed * MaxDrivingForce;
 	FVector TrackLocation = GetComponentLocation();
 

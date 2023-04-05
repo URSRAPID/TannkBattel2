@@ -14,7 +14,7 @@ void ATankPlayerController::BeginPlay()
 
 	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
 
-	if (!ensure(AimingComponent)) 
+	if (!ensure(AimingComponent))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Aiming Component not found"))
 	}
@@ -35,9 +35,10 @@ void ATankPlayerController::Tick(float Deltatime)
 
 
 
-ATank* ATankPlayerController::GetControlledTank() const
+APawn* ATankPlayerController::GetControlledTank() const
 {
-	return Cast<ATank>(GetPawn());
+
+	return GetPawn();
 }
 
 
@@ -47,16 +48,16 @@ void ATankPlayerController::AimTowardCrosshair()
 	if (!ensure(GetControlledTank())) { return; }
 	FVector HitLocation; //Out Parameter
 
-	if (GetSightRayHitLocation(HitLocation)) 
+	if (GetSightRayHitLocation(HitLocation))
 	{
-		
 
-		GetControlledTank()->AimAt(HitLocation);
+		auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+		AimingComponent->AimAt(HitLocation, AimingComponent->GetLaunchSpeed());
 		//UE_LOG(LogTemp, Warning, TEXT("Aiming location is : %s"), HitLocation)
 	}
 }
 
-bool ATankPlayerController::GetSightRayHitLocation(FVector & OutHitLocation) const
+bool ATankPlayerController::GetSightRayHitLocation(FVector& OutHitLocation) const
 {
 
 	int VPSizeX, VPSizeY;
@@ -85,7 +86,7 @@ bool ATankPlayerController::GetLookVectorHitPosition(FVector LookDirection, FVec
 		ECollisionChannel::ECC_Visibility
 	);
 	//DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor(255, 0, 0, 1), false, 0.f, 0.f, 5.f);
-	
+
 	if (hitSucced)
 	{
 		HitLocation = HitResult.Location;
@@ -95,7 +96,7 @@ bool ATankPlayerController::GetLookVectorHitPosition(FVector LookDirection, FVec
 	HitLocation = FVector(0.f); //Line didn't drew
 	return false;
 
-	
+
 }
 
 bool ATankPlayerController::GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const
