@@ -84,7 +84,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 	FRotator AimAsRotator = AimDirection.Rotation();
 	FRotator DeltaRotator = AimAsRotator - CanonRotation;
 
-	
+	//TODO Security - Canon / Turret
 
 	//Move the barrel the right amount this frame
 	//Given a max elevation speed, and the frame time
@@ -98,7 +98,7 @@ void UTankAimingComponent::Fire()
 {
 	bool IsReloaded = (FPlatformTime::Seconds() - LastTimeFire) > ReloadTime;
 	if (!ensure(ProjectileBlueprint)) { return; }
-
+	//TODO Security - Canon
 	if (IsReloaded)
 	{
 	

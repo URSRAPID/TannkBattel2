@@ -6,7 +6,7 @@
 #include "TankAIController.generated.h"
 
 class UTankAimingComponent;
-class ATank;
+class ATank; //TODO Delete
 
 /**
  *
@@ -24,7 +24,7 @@ protected:
 
 
 private:
-
+	//TODO Nommage
 	APawn* GetControlledAITank();
 
 public:

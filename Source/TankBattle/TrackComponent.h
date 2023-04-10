@@ -15,7 +15,7 @@ class TANKBATTLE_API UTrackComponent : public UStaticMeshComponent
 	GENERATED_BODY()
 
 public:
-
+	//TODO Comment
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void SetThrottle(float Speed);
 

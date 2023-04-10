@@ -6,6 +6,7 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
+//TODO Delete
 class UTankAimingComponent;
 class UCanonComponent;
 class UTurretComponent;
@@ -26,6 +27,7 @@ public:
 	ATank();
 
 protected:
+	//TODO Delete
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 

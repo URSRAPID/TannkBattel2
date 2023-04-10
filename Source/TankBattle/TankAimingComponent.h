@@ -26,9 +26,11 @@ class TANKBATTLE_API UTankAimingComponent : public UActorComponent
 public:
 	// Sets default values for this component's properties
 	UTankAimingComponent();
-	void AimAt(FVector HitLocation, float LaunchSpeed);
-	float GetLaunchSpeed();
+	//TODO Refacto - inutile d'avoir LaunchSpeed en paramètre il est utile dans Aiming Component seulement
+	void AimAt(FVector HitLocation, float LaunchSpeed); 
+	float GetLaunchSpeed(); //Inutile
 
+	//TODO Comment
 	UFUNCTION(BlueprintCallable, Category = FireSetup)
 		void Fire();
 

@@ -14,6 +14,7 @@ void ATankPlayerController::BeginPlay()
 
 	auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
 
+	//TODO Refacto -> ensure permet d'avoir un log, inutile d'écrire un log à la main
 	if (!ensure(AimingComponent))
 	{
 		UE_LOG(LogTemp, Warning, TEXT("Aiming Component not found"))
@@ -53,7 +54,7 @@ void ATankPlayerController::AimTowardCrosshair()
 
 		auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
 		AimingComponent->AimAt(HitLocation, AimingComponent->GetLaunchSpeed());
-		//UE_LOG(LogTemp, Warning, TEXT("Aiming location is : %s"), HitLocation)
+		//UE_LOG(LogTemp, Warning, TEXT("Aiming location is : %s"), HitLocation) //TODO Delete
 	}
 }
 

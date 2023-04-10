@@ -9,7 +9,7 @@
 class UTankAimingComponent;
 
 
-class ATank;
+class ATank; //TODO Delete
 /**
  *
  */
@@ -19,10 +19,11 @@ class TANKBATTLE_API ATankPlayerController : public APlayerController
 	GENERATED_BODY()
 
 protected:
-
+	//TODO Nommage
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		APawn* GetControlledTank() const;
 
+	//TODO Comment
 	UFUNCTION(BlueprintImplementableEvent, Category = Setup)
 		void FindAimingComponent(UTankAimingComponent* AimingComponentRef);
 

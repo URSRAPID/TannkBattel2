@@ -34,12 +34,15 @@ void ATankAIController::Tick(float Deltatime)
 
 
 	if (!ensure(PlayerTank)) { return; }
+	//TODO Security - OwnTank
+	//TODO Security - AimingComponent
 
 
 	AimingComponent->AimAt(PlayerTank->GetActorLocation(), AimingComponent->GetLaunchSpeed());
 	
 	AimingComponent->Fire();
 
+	//TODO Delete
 	//GetControlledAITank()->AimAt(GetControlledAITank()->GetActorLocation());
 	////UE_LOG(LogTemp, Warning, TEXT("tank player pos % s"), *GetPlayerTank()->GetActorLocation().ToString());
 	//GetControlledAITank()->Fire();

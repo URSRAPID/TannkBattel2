@@ -25,6 +25,7 @@ private:
 		float MinRotationDegrees = 0;
 
 public:
+	//TODO Comment
 	void TurnRight(float DegreesPerSecond);
 	
 };

@@ -20,7 +20,7 @@ void UTankMovementComponent::IntendMoveForward(float Throw)
 
 void UTankMovementComponent::IntendTurnRight(float Throw)
 {
-	if (!ensure(LeftTrack) || !ensure(RightTrack)) { return; }
+	if (!ensure(LeftTrack) || !ensure(RightTrack)) { return; } //TODO faire une double sécurité pour permettre au ensure de renvoyer le bon log si un des 2 track est nullptr
 
 	
 	//TODO:

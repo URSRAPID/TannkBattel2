@@ -15,6 +15,7 @@ class TANKBATTLE_API UCanonComponent : public UStaticMeshComponent
 	GENERATED_BODY()
 
 public:
+	//TODO Comment
 	void Elevate(float DegreesPerSecond);
 
 private:

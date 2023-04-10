@@ -12,7 +12,7 @@ void UTurretComponent::TurnRight(float DegreesPerSecond)
 	auto RotationChange = RelativeSpeedRotationClamped * MaxRotationDegrees * GetWorld()->DeltaTimeSeconds;
 	auto RawNewRotation = GetRelativeRotation().Yaw + RotationChange;
 
-	//UE_LOG(LogTemp, Warning, TEXT("Rotate at : %f"), RelativeSpeedRotationClamped);
+	//UE_LOG(LogTemp, Warning, TEXT("Rotate at : %f"), RelativeSpeedRotationClamped); //TODO Delete
 
 	SetRelativeRotation(FRotator(0.f, RawNewRotation, 0.f));
 }

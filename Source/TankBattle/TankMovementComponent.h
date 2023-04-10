@@ -7,7 +7,7 @@
 #include "TankMovementComponent.generated.h"
 
 class UTrackComponent;
-class TrackComponent;
+class TrackComponent; //TODO Delete - NON !
 
 /**
  * 
@@ -20,10 +20,10 @@ class TANKBATTLE_API UTankMovementComponent : public UNavMovementComponent
 		
 
 public:
-
+	//TODO Comment
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void IntendMoveForward(float Throw);
-
+	//TODO Comment
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void IntendTurnRight(float Throw);
 
@@ -34,6 +34,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category = Setup)
 		void Initialize(UTrackComponent* LeftTrackToSet, UTrackComponent* RightTrackToSet);
 
+	//TODO Comment
 	virtual void RequestDirectMove(const FVector& MoveVelocity, bool bForceMaxSpeed) override;
 private:
 	
